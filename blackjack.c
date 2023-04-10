@@ -176,22 +176,42 @@ void end(Game* game) {
 int main() {
     srand(time(NULL));
 
-    printf("Welkom bij Blackjack in C!\n");
+    char action[5];
 
-    Game g = {
-        .end = end,
-        .createPlayers = createPlayers,
-        .shuffle = shuffle,
-        .play = play,
-        .hit = hit,
-        .isAlive = 1
-    };
+    while (1) {
+        printf("Welkom bij BlackJack\n");
+        printf("Type 'start' om te starten, 'help' voor hulp of 'exit' om af te sluiten\n\n");
+        printf(">");
+        scanf("%s", action);
 
-    char name[15];
-    printf("Wat is je naam?> ");
-    scanf("%s", name);
+        if (strcmp(action, "help") == 0) {
+            printf("------\n\n");
+            printf("Blackjack is een populair kaartspel dat meestal wordt gespeeld in casino's, maar ook vaak in huiselijke kring. Het doel van het spel is om een hand te krijgen met een hogere waarde dan de hand van de dealer, zonder de waarde van 21 te overschrijden.Het spel wordt gespeeld met een standaard dek van 52 kaarten.Elke kaart heeft een puntwaarde die overeenkomt met het nummer op de kaart, behalve de plaatjeskaarten(boer, vrouw, koning) die elk 10 punten waard zijn, en de aas die 1 of 11 punten waard kan zijn, afhankelijk van wat beter uitkomt voor de speler.Aan het begin van het spel krijgt elke speler, inclusief de dealer, twee kaarten.De speler kan ervoor kiezen om extra kaarten te vragen(hit) om zo dichter bij de 21 te komen, of hij kan passen en hopen dat zijn hand al sterk genoeg is om de dealer te verslaan.Als de speler 21 punten bereikt met zijn eerste twee kaarten(een aas en een kaart met een puntwaarde van 10), wordt dit een blackjack genoemd en wint de speler automatisch, tenzij de dealer ook een blackjack heeft.Als alle spelers hebben gehandeld, is het de beurt aan de dealer om zijn hand te spelen.De dealer moet kaarten blijven trekken totdat hij minimaal 17 punten heeft bereikt.Als de dealer meer dan 21 punten heeft(bust), wint elke speler die nog in het spel is.Als de speler een hogere hand heeft dan de dealer zonder de 21 te overschrijden, wint de speler.Als de dealer een hogere hand heeft, verliest de speler.Als de speler en de dealer dezelfde hand hebben, eindigt het spel in een gelijkspel.\n\n");
+            printf("------\n\n");
+        }
 
-    play(&g, name);
+        if (strcmp(action, "start") == 0) {
+
+            Game game = {
+                    .end = end,
+                    .createPlayers = createPlayers,
+                    .shuffle = shuffle,
+                    .play = play,
+                    .hit = hit,
+                    .isAlive = 1
+            };
+
+            char name[15];
+            printf("Wat is je naam?> ");
+            scanf("%s", name);
+
+            play(&game, name);
+        }
+
+        if (strcmp(action, "exit") == 0) {
+            break;
+        }
+    }
 
     return 0;
 }
